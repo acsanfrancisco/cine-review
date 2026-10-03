@@ -22,8 +22,8 @@ public class Review {
     @Column(name = "rating")
     private Double rating;
 
-    @Column(name = "comment")
-    private String comment;
+    @Column(name = "overview", columnDefinition = "TEXT")
+    private String overview;
 
     @Column(name = "created_at")
     private LocalDate createdAt;
