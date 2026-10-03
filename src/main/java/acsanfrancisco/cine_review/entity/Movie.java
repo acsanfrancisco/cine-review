@@ -20,11 +20,11 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "external_id", unique = true)
+    private Long externalId;
+
     @Column(name = "title")
     private String title;
-
-    @Column(name = "overview")
-    private String overview;
 
     @Column(name = "release_date")
     private LocalDate releaseDate;
