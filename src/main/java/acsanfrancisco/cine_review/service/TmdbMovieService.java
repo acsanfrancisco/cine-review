@@ -3,6 +3,7 @@ package acsanfrancisco.cine_review.service;
 import acsanfrancisco.cine_review.dto.response.MovieResponse;
 import acsanfrancisco.cine_review.entity.Movie;
 import acsanfrancisco.cine_review.exception.MovieException;
+import acsanfrancisco.cine_review.exception.ResourceNotFoundException;
 import acsanfrancisco.cine_review.integration.MovieSearch;
 import acsanfrancisco.cine_review.integration.tmdb.dto.TmdbMovieResponse;
 import acsanfrancisco.cine_review.integration.tmdb.dto.TmdbSearchResponse;
@@ -30,7 +31,7 @@ public class TmdbMovieService {
         TmdbMovieResponse tmdbMovieResponse = movieSearch.searchMovieByExternalId(externalId);
 
         if(tmdbMovieResponse == null){
-            throw new MovieException("Movie not found for external ID: " + externalId);
+            throw new ResourceNotFoundException("Movie not found for external ID: " + externalId);
         }
 
         if(movieRepository.existsByExternalId(externalId)){

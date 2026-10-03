@@ -3,6 +3,7 @@ package acsanfrancisco.cine_review.service;
 import acsanfrancisco.cine_review.dto.request.CreateUserRequest;
 import acsanfrancisco.cine_review.dto.response.UserResponse;
 import acsanfrancisco.cine_review.entity.User;
+import acsanfrancisco.cine_review.exception.ResourceNotFoundException;
 import acsanfrancisco.cine_review.exception.UserException;
 import acsanfrancisco.cine_review.mapper.UserMapper;
 import acsanfrancisco.cine_review.repository.UserRepository;
@@ -28,7 +29,7 @@ public class UserService {
     @Transactional
     public void  deleteUser(Long userId) {
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new UserException("User not found for ID: " + userId));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found for ID: " + userId));
         if(!user.getReviews().isEmpty()){
             throw new UserException("Must not delete a User with Reviews");
         }
@@ -38,13 +39,13 @@ public class UserService {
     @Transactional(readOnly = true)
     public User findUserById(Long userId) {
         return userRepository.findById(userId)
-                .orElseThrow(() -> new UserException("User not found for ID: " + userId));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found for ID: " + userId));
     }
 
     @Transactional(readOnly = true)
     public User findUserByEmail(String email) {
         return userRepository.findByEmail(email)
-                .orElseThrow(() -> new UserException("User not found for Email: " + email));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found for Email: " + email));
     }
 
 }
