@@ -2,7 +2,7 @@ package acsanfrancisco.cine_review.service;
 
 import acsanfrancisco.cine_review.dto.response.MovieResponse;
 import acsanfrancisco.cine_review.entity.Movie;
-import acsanfrancisco.cine_review.exception.MovieException;
+import acsanfrancisco.cine_review.exception.ResourceAlreadyExistsException;
 import acsanfrancisco.cine_review.exception.ResourceNotFoundException;
 import acsanfrancisco.cine_review.integration.MovieSearch;
 import acsanfrancisco.cine_review.integration.tmdb.dto.TmdbMovieResponse;
@@ -35,7 +35,7 @@ public class TmdbMovieService {
         }
 
         if(movieRepository.existsByExternalId(externalId)){
-            throw new MovieException("Movie already exists for external ID: " + externalId);
+            throw new ResourceAlreadyExistsException("Movie already exists for external ID: " + externalId);
         }
 
         MovieResponse movieResponse = MovieMapper.toMovieResponse(tmdbMovieResponse);

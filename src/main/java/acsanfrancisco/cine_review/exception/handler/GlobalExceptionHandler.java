@@ -45,12 +45,12 @@ public class GlobalExceptionHandler {
                 .body(new ErrorMessage(request, HttpStatus.BAD_GATEWAY, exception.getMessage()));
     }
 
-    @ExceptionHandler(MovieException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseEntity<ErrorMessage> movieException(MovieException exception, HttpServletRequest request) {
+    @ExceptionHandler(ResourceAlreadyExistsException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ResponseEntity<ErrorMessage> resourceAlreadyExistsException(ResourceAlreadyExistsException exception, HttpServletRequest request) {
         return ResponseEntity
-                .status(HttpStatus.BAD_REQUEST)
-                .body(new ErrorMessage(request, HttpStatus.BAD_REQUEST, exception.getMessage()));
+                .status(HttpStatus.CONFLICT)
+                .body(new ErrorMessage(request, HttpStatus.CONFLICT, exception.getMessage()));
     }
 
     @ExceptionHandler(ResourceNotFoundException.class)
@@ -59,14 +59,6 @@ public class GlobalExceptionHandler {
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
                 .body(new ErrorMessage(request, HttpStatus.NOT_FOUND, exception.getMessage()));
-    }
-
-    @ExceptionHandler(ReviewException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseEntity<ErrorMessage> reviewException(ReviewException exception, HttpServletRequest request) {
-        return ResponseEntity
-                .status(HttpStatus.BAD_REQUEST)
-                .body(new ErrorMessage(request, HttpStatus.BAD_REQUEST, exception.getMessage()));
     }
 
     @ExceptionHandler(UserException.class)

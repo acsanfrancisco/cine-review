@@ -3,6 +3,7 @@ package acsanfrancisco.cine_review.service;
 import acsanfrancisco.cine_review.dto.request.CreateUserRequest;
 import acsanfrancisco.cine_review.dto.response.UserResponse;
 import acsanfrancisco.cine_review.entity.User;
+import acsanfrancisco.cine_review.exception.ResourceAlreadyExistsException;
 import acsanfrancisco.cine_review.exception.ResourceNotFoundException;
 import acsanfrancisco.cine_review.exception.UserException;
 import acsanfrancisco.cine_review.mapper.UserMapper;
@@ -20,7 +21,7 @@ public class UserService {
     @Transactional
     public UserResponse createUser(CreateUserRequest createUserRequest) {
         if(userRepository.existsByEmail(createUserRequest.getEmail())) {
-            throw new UserException("Email already exists: "  + createUserRequest.getEmail());
+            throw new ResourceAlreadyExistsException("Email already exists: "  + createUserRequest.getEmail());
         }
         User user = UserMapper.toEntity(createUserRequest);
         return UserMapper.toResponse(userRepository.save(user));
