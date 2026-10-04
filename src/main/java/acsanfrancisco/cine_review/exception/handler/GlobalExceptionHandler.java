@@ -18,7 +18,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorMessage> genericError(Exception exception, HttpServletRequest request) {
         return ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(new ErrorMessage(request, HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage()));
+                .body(new ErrorMessage(request, HttpStatus.INTERNAL_SERVER_ERROR, "Unexpected error occurred."));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -34,7 +34,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorMessage> httpMessageNotReadableException(HttpMessageNotReadableException exception, HttpServletRequest request){
         return ResponseEntity
                 .status(HttpStatus.UNPROCESSABLE_CONTENT)
-                .body(new ErrorMessage(request, HttpStatus.UNPROCESSABLE_CONTENT, exception.getMessage()));
+                .body(new ErrorMessage(request, HttpStatus.UNPROCESSABLE_CONTENT, "Invalid request body"));
     }
 
     @ExceptionHandler(IntegrationException.class)
