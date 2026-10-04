@@ -35,12 +35,12 @@ public class MovieController implements MovieControllerDoc {
                 .body(tmdbMovieService.saveMovie(externalId));
     }
 
-    @GetMapping("/externalId/{externalId}")
+    @GetMapping("/external/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<MovieResponse> findSavedMoviesByExternalId(@PathVariable Long externalId) {
+    public ResponseEntity<MovieResponse> findSavedMoviesByExternalId(@PathVariable Long id) {
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(MovieMapper.toMovieResponse(movieService.findSavedMovieByExternalId(externalId)));
+                .body(MovieMapper.toMovieResponse(movieService.findSavedMovieByExternalId(id)));
     }
 
     @GetMapping("/{id}")
