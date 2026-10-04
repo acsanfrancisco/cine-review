@@ -1,5 +1,6 @@
 package acsanfrancisco.cine_review.controller;
 
+import acsanfrancisco.cine_review.doc.ReviewControllerDoc;
 import acsanfrancisco.cine_review.dto.request.CreateReviewRequest;
 import acsanfrancisco.cine_review.dto.response.ReviewResponse;
 import acsanfrancisco.cine_review.service.ReviewService;
@@ -13,7 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/reviews")
 @RequiredArgsConstructor
-public class ReviewController {
+public class ReviewController implements ReviewControllerDoc {
 
     private final ReviewService reviewService;
 

@@ -1,5 +1,6 @@
 package acsanfrancisco.cine_review.controller;
 
+import acsanfrancisco.cine_review.doc.MovieControllerDoc;
 import acsanfrancisco.cine_review.dto.response.MovieResponse;
 import acsanfrancisco.cine_review.mapper.MovieMapper;
 import acsanfrancisco.cine_review.service.MovieService;
@@ -13,7 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/movies")
 @RequiredArgsConstructor
-public class MovieController {
+public class MovieController implements MovieControllerDoc {
 
     private final TmdbMovieService tmdbMovieService;
     private final MovieService movieService;

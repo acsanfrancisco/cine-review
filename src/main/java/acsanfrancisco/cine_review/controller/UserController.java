@@ -1,5 +1,6 @@
 package acsanfrancisco.cine_review.controller;
 
+import acsanfrancisco.cine_review.doc.UserControllerDoc;
 import acsanfrancisco.cine_review.dto.request.CreateUserRequest;
 import acsanfrancisco.cine_review.dto.response.UserResponse;
 import acsanfrancisco.cine_review.mapper.UserMapper;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/users")
 @RequiredArgsConstructor
-public class UserController {
+public class UserController implements UserControllerDoc {
 
     private final UserService userService;
 
