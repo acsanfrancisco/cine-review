@@ -23,7 +23,7 @@ public class Movie {
     @Column(name = "external_id", unique = true)
     private Long externalId;
 
-    @Column(name = "title")
+    @Column(name = "title", nullable = false)
     private String title;
 
     @Column(name = "release_date")
