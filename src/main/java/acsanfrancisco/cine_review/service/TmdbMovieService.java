@@ -21,7 +21,6 @@ public class TmdbMovieService {
     private final MovieRepository movieRepository;
     private final MovieSearch<TmdbSearchResponse, TmdbMovieResponse> movieSearch;
 
-    @Transactional(readOnly = true)
     public List<MovieResponse> findMoviesByTitle(String title){
         TmdbSearchResponse tmdbSearchResponse = movieSearch.searchMovieByTitle(title);
         return MovieMapper.toMovieResponse(tmdbSearchResponse);
