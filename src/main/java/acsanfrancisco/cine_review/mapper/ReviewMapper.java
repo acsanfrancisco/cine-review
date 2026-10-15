@@ -24,6 +24,8 @@ public class ReviewMapper {
         reviewResponse.setCreatedAt(review.getCreatedAt());
         reviewResponse.setMovieTitle(review.getMovie().getTitle());
         reviewResponse.setUserId(review.getUser().getId());
+        reviewResponse.setMovieId(review.getMovie().getId());
+        reviewResponse.setMovieExternalId(review.getMovie().getExternalId());
         return reviewResponse;
     }
 }

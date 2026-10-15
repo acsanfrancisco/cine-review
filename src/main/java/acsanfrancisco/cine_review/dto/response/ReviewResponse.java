@@ -18,5 +18,9 @@ public class ReviewResponse {
 
     private Long userId;
 
+    private Long movieId;
+
+    private Long movieExternalId;
+
     private String movieTitle;
 }
