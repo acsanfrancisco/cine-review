@@ -5,6 +5,7 @@ import acsanfrancisco.cine_review.dto.response.ReviewResponse;
 import acsanfrancisco.cine_review.entity.Movie;
 import acsanfrancisco.cine_review.entity.Review;
 import acsanfrancisco.cine_review.entity.User;
+import acsanfrancisco.cine_review.exception.ResourceNotFoundException;
 import acsanfrancisco.cine_review.mapper.ReviewMapper;
 import acsanfrancisco.cine_review.repository.ReviewRepository;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +25,13 @@ public class ReviewService {
     public ReviewResponse createReview(CreateReviewRequest createReviewRequest) {
         Review review = ReviewMapper.toEntity(createReviewRequest);
         User user = userService.findUserById(createReviewRequest.getUserId());
-        Movie movie = movieService.findSavedMovieByExternalId(createReviewRequest.getMovieExternalId());
+        Movie movie = movieService.findMovieByExternalId(createReviewRequest.getMovieExternalId());
+        if(user == null) {
+            throw new ResourceNotFoundException("User not found. ID = " + createReviewRequest.getUserId());
+        }
+        if(movie == null) {
+            throw new ResourceNotFoundException("Movie not found. ID = " + createReviewRequest.getMovieExternalId());
+        }
         review.setUser(user);
         review.setMovie(movie);
         return ReviewMapper.toResponse(reviewRepository.save(review));
@@ -46,7 +53,7 @@ public class ReviewService {
 
     @Transactional(readOnly = true)
     public List<ReviewResponse> findReviewsByMovieExternalId(Long movieExternalId) {
-        movieService.findSavedMovieByExternalId(movieExternalId);
+        movieService.findMovieByExternalId(movieExternalId);
         List<Review> reviews = reviewRepository.findReviewsByMovieExternalId(movieExternalId);
         return reviews.stream().map(ReviewMapper::toResponse).toList();
     }

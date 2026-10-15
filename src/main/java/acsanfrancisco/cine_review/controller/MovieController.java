@@ -37,10 +37,10 @@ public class MovieController implements MovieControllerDoc {
 
     @GetMapping("/external/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<MovieResponse> findSavedMoviesByExternalId(@PathVariable Long id) {
+    public ResponseEntity<MovieResponse> findMovieByExternalId(@PathVariable Long id) {
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(MovieMapper.toMovieResponse(movieService.findSavedMovieByExternalId(id)));
+                .body(MovieMapper.toMovieResponse(movieService.findMovieByExternalId(id)));
     }
 
     @GetMapping("/{id}")

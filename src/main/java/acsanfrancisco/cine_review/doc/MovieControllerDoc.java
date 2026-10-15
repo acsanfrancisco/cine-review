@@ -83,7 +83,7 @@ public interface MovieControllerDoc {
                     )
             }
     )
-    ResponseEntity<MovieResponse> findSavedMoviesByExternalId(@PathVariable
+    ResponseEntity<MovieResponse> findMovieByExternalId(@PathVariable
                                                               @Parameter(description = "Movie external ID", required = true, example = "500")
                                                               Long externalId);
 

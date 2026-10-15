@@ -14,7 +14,7 @@ public class MovieService {
     private final MovieRepository movieRepository;
 
     @Transactional(readOnly = true)
-    public Movie findSavedMovieByExternalId(Long movieExternalId) {
+    public Movie findMovieByExternalId(Long movieExternalId) {
         return movieRepository.findByExternalId(movieExternalId)
                 .orElseThrow(()-> new ResourceNotFoundException("Movie not found for External ID: " + movieExternalId));
     }
